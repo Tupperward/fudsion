@@ -7,19 +7,21 @@ from random import randint
 allDishes = Dish.objects.all()
 
 def pickDish():
-    dishId = randint(1,len(allDishes))
-    dish = allDishes[dishId]
-    return dish
+    dishId = randint(0,len(allDishes)-1)
+    return allDishes[dishId]
 
 def compareDishes(first, second):
     return first.id == second.id
+
+def compareCuisine(first,second):
+    return first.cuisine == second.cuisine
 
 def makeDishPair():
     match = True
     while match:
         firstDish = pickDish()
         secondDish = pickDish()
-        if not (compareDishes(firstDish,secondDish)):
+        if not (compareDishes(firstDish,secondDish)) and not (compareCuisine(firstDish,secondDish)):
             match = False
             return firstDish, secondDish
         else:
@@ -27,4 +29,10 @@ def makeDishPair():
 
 def index(request):
     dishPair = makeDishPair()
-    return HttpResponse("You should try eating %s %s"% dishPair[1], dishPair[2])
+    response = "You should try eating {firstDish} {secondDish}s"
+    return HttpResponse(response.format(firstDish = dishPair[0], secondDish = dishPair[1]))
+
+
+def suggestions(request):
+    response = "Here's where you submit suggestions for food to go into this bullshit app."
+    return HttpResponse(response)
