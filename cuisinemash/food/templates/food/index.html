@@ -1,0 +1,11 @@
+{%if dishPair %}
+
+    <p>
+    {% for dish in dishPair %}
+        {{dish.dishName}}
+    {% endfor %}
+    </p>
+
+{%else%}
+    <p>There was some sort of fuckup</p>
+{%endif%}

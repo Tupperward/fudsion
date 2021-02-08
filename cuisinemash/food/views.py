@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from food.models import Dish
 from random import randint
+from django.template import loader
+
 # Create your views here.
 
 allDishes = Dish.objects.all()
@@ -28,9 +30,12 @@ def makeDishPair():
             continue
 
 def index(request):
-    dishPair = makeDishPair()
-    response = "You should try eating {firstDish} {secondDish}s"
-    return HttpResponse(response.format(firstDish = dishPair[0], secondDish = dishPair[1]))
+    try:
+        dishPair = makeDishPair()
+    except:
+        raise Http404("Page does not exist")
+    context = {'dishPair': dishPair}
+    return render(request, 'food/index.html', context)
 
 
 def suggestions(request):
