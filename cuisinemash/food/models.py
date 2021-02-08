@@ -4,7 +4,7 @@ from django_random_queryset import RandomManager
 # Create your models here.
 class Dish(models.Model):
     dishName = models.CharField(max_length=140)
-    description = models.CharField(max_length=280)
+    description = models.CharField(max_length=280,blank=True, default=None)
     cuisine = models.CharField(max_length=48)
     #likes = models.IntegerField()
     def __str__(self):
