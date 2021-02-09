@@ -31,12 +31,20 @@ def makeDishPair():
 
 def index(request):
     try:
+        filler = True
+        filler
+    except:
+        raise Http404("Page does not exist")
+    context = {}
+    return render(request, 'food/index.html', context)
+
+def food(request):
+    try:
         dishPair = makeDishPair()
     except:
         raise Http404("Page does not exist")
     context = {'dishPair': dishPair}
-    return render(request, 'food/index.html', context)
-
+    return render(request, 'food/food.html', context)
 
 def suggestions(request):
     response = "Here's where you submit suggestions for food to go into this bullshit app."

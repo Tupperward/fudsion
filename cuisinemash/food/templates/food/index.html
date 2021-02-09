@@ -1,16 +1,2 @@
-{%if dishPair %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'static/food/style.css'%}"
-
-    <div id ="intro">You should be eating:</div>
-    <p>
-    {% for dish in dishPair %}
-        <div id = "dish"><p>{{dish.dishName}}</p><div>
-    {% endfor %}
-    </p>
-
-    <a href="/suggestions">Wanna suggest a dish?</a>
-
-{%else%}
-    <p>There was some sort of fuckup</p>
-{%endif%}
+<a href ="/food">Find out what to cook</a> 
+<a href="/suggestions">Tell someone else what to cook</a>
